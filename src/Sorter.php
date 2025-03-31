@@ -100,10 +100,10 @@ final class Sorter
             parse_str($this->prefix, $result);
 
             /** @psalm-suppress RedundantCondition */
-            while (is_array($result)) {
+            while (\is_array($result)) {
                 $key = array_key_first($result);
 
-                if (!(is_string($key) && isset($values[$key]) && is_array($result[$key]))) {
+                if (!(\is_string($key) && isset($values[$key]) && \is_array($result[$key]))) {
                     break;
                 }
                 $values = $values[$key];
@@ -140,7 +140,7 @@ final class Sorter
             parse_str($this->prefix, $result);
             $key = array_key_first($result);
 
-            if (is_string($key)) {
+            if (\is_string($key)) {
                 /** @psalm-suppress MixedArgumentTypeCoercion */
                 $this->handle([$key => $request->query->all($key)]);
             }
