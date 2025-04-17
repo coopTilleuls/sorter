@@ -3,9 +3,9 @@ Sorter
 
 Sorter is a PHP column sorting library that allows you to apply sorts of any kind of data source.
 
-[![tests](https://github.com/yohang/sorter/actions/workflows/ci.yml/badge.svg)](https://github.com/yohang/sorter/actions/workflows/ci.yml)
-[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fyohang%2Fsorter%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/yohang/sorter/main)
-[![Coverage Status](https://coveralls.io/repos/github/yohang/sorter/badge.svg?branch=main)](https://coveralls.io/github/yohang/sorter?branch=main)
+[![tests](https://github.com/coopTilleuls/sorter/actions/workflows/ci.yml/badge.svg)](https://github.com/coopTilleuls/sorter/actions/workflows/ci.yml)
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2FcoopTilleuls%2Fsorter%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/coopTilleuls/sorter/main)
+[![Coverage Status](https://coveralls.io/repos/github/coopTilleuls/sorter/badge.svg?branch=main)](https://coveralls.io/github/coopTilleuls/sorter?branch=main)
 
 Features
 --------
@@ -21,7 +21,7 @@ Installation
 ------------
 
 ```bash
- $ composer require yohang/sorter
+ $ composer require tilleuls/sorter
 ```
 
 ### Optionnal : enable symfony bundle

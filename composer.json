@@ -1,7 +1,9 @@
 {
-    "name": "yohang/sorter",
+    "name": "tilleuls/sorter",
     "description": "A library to dynamically sort collections / queries",
     "type": "library",
+    "keywords": ["symfony", "symfony-bundle", "sort", "column-sort", "doctrine"],
+    "license": "MIT",
     "require": {
         "php": ">=8.1",
         "symfony/http-foundation": "^5.4|^6.0|^7.0"
@@ -35,11 +37,10 @@
         "doctrine/orm": "Needed for use of ORMApplier",
         "symfony/property-access": "Needed for use of ArrayAdapter"
     },
-    "license": "MIT",
     "authors": [
         {
-            "name": "yohang",
-            "email": "yohan@giarel.li"
+            "name": "Yohan Giarelli",
+            "email": "yohan@les-tilleuls.coop"
         }
     ],
     "extra": {
@@ -48,6 +49,7 @@
         }
     },
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
             "infection/extension-installer": true
         }
