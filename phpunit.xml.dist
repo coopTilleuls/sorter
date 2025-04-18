@@ -3,8 +3,6 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          colors="true"
          bootstrap="tests/bootstrap.php"
-         displayDetailsOnTestsThatTriggerDeprecations="true"
-         displayDetailsOnPhpunitDeprecations="true"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd">
     <php>
         <env name="KERNEL_CLASS" value="AppKernel" />

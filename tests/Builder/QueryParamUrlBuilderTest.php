@@ -34,6 +34,7 @@ final class QueryParamUrlBuilderTest extends TestCase
 
         $this->assertSame('/foo/bar?prefix%5Bb%5D=ASC&baz=qux', $urlBuilder->generateFromRequest($sorter, $request, 'b'));
     }
+
     public function testItGeneratesWithDoublePrefix(): void
     {
         /** @var Request&MockObject $request */

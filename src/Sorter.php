@@ -139,8 +139,8 @@ final class Sorter
 
         $fields = [];
         foreach ($this->getFields() as $field) {
-            if ($request->query->has($field) && $value = $request->query->getString($field)) {
-                $fields[$field] = $value;
+            if (null !== ($value = $request->query->get($field))) {
+                $fields[$field] = (string) $value;
             }
         }
 

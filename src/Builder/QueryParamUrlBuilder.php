@@ -23,7 +23,6 @@ final class QueryParamUrlBuilder implements UrlBuilder
         $parsedUrl = parse_url($request->getUri());
         parse_str($parsedUrl['query'] ?? '', $query);
         /** @var array<string, string|array<string, string>> $query */
-
         $prefix = $sorter->getPrefix();
         foreach ($sorter->getFields() as $fieldName) {
             if (null === $prefix) {

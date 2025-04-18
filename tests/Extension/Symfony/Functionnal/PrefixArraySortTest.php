@@ -13,7 +13,7 @@ final class PrefixArraySortTest extends WebTestCase
     public function testItDisplaySortedTable(string $queryString, array $titles, array $links, string $clickedLink, string $expectedUrl): void
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/array-sort-prefix' . $queryString);
+        $crawler = $client->request('GET', '/array-sort-prefix'.$queryString);
         $this->assertResponseIsSuccessful();
 
         foreach ($titles as $i => $title) {
@@ -94,12 +94,11 @@ final class PrefixArraySortTest extends WebTestCase
         ];
     }
 
-
     #[DataProvider('providesSortParamsAndTitleWithDoublePrefix')]
     public function testItDisplaySortedTableWithDoublePrefix(string $queryString, array $titles, array $links, string $clickedLink, string $expectedUrl): void
     {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/array-sort-double-prefix' . $queryString);
+        $crawler = $client->request('GET', '/array-sort-double-prefix'.$queryString);
         $this->assertResponseIsSuccessful();
 
         foreach ($titles as $i => $title) {

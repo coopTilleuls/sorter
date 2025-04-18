@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sorter\Tests\Util;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Sorter\Exception\CannotExtractException;
 use Sorter\Util\QueryArrayExtractor;
-use PHPUnit\Framework\TestCase;
 
 final class QueryArrayExtractorTest extends TestCase
 {
@@ -54,7 +56,7 @@ final class QueryArrayExtractorTest extends TestCase
         ];
 
         yield 'triple prefixed query' => [
-            'queryArray' => ['prefix' => ['second' => [ 'third' => ['a' => 'foo', 'b' => 'bar']]]],
+            'queryArray' => ['prefix' => ['second' => ['third' => ['a' => 'foo', 'b' => 'bar']]]],
             'prefix' => 'prefix[second][third]',
             'expected' => ['a' => 'foo', 'b' => 'bar'],
         ];
