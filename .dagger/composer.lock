@@ -272,12 +272,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "41f5ce75250c5c3af5a4bb2410143ddfede8127c"
+                "reference": "7b2f29fe81dc4da0ca0ea7d42107a0845946ea77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/41f5ce75250c5c3af5a4bb2410143ddfede8127c",
-                "reference": "41f5ce75250c5c3af5a4bb2410143ddfede8127c",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/7b2f29fe81dc4da0ca0ea7d42107a0845946ea77",
+                "reference": "7b2f29fe81dc4da0ca0ea7d42107a0845946ea77",
                 "shasum": ""
             },
             "require": {
@@ -375,7 +375,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.9"
+                "source": "https://github.com/guzzle/guzzle/tree/7.9.3"
             },
             "funding": [
                 {
@@ -391,7 +391,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-03T10:53:14+00:00"
+            "time": "2025-03-27T13:37:11+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -483,12 +483,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "ca06f23f35cf0b70a6f56d3d95c51bbc1062fade"
+                "reference": "c2270caaabe631b3b44c85f99e5a04bbb8060d16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/ca06f23f35cf0b70a6f56d3d95c51bbc1062fade",
-                "reference": "ca06f23f35cf0b70a6f56d3d95c51bbc1062fade",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/c2270caaabe631b3b44c85f99e5a04bbb8060d16",
+                "reference": "c2270caaabe631b3b44c85f99e5a04bbb8060d16",
                 "shasum": ""
             },
             "require": {
@@ -576,7 +576,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.7"
+                "source": "https://github.com/guzzle/psr7/tree/2.7.1"
             },
             "funding": [
                 {
@@ -592,7 +592,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-03T10:49:42+00:00"
+            "time": "2025-03-27T12:30:47+00:00"
         },
         {
             "name": "jetbrains/phpstorm-stubs",
@@ -712,12 +712,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "033c9beab9eb708509a3d400e9f0ffeb2d440e71"
+                "reference": "f5c6227b2664d1e75fda65f1e6c5686a0c034b31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/033c9beab9eb708509a3d400e9f0ffeb2d440e71",
-                "reference": "033c9beab9eb708509a3d400e9f0ffeb2d440e71",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/f5c6227b2664d1e75fda65f1e6c5686a0c034b31",
+                "reference": "f5c6227b2664d1e75fda65f1e6c5686a0c034b31",
                 "shasum": ""
             },
             "require": {
@@ -795,15 +795,19 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/serializer/issues",
-                "source": "https://github.com/schmittjoh/serializer/tree/3.32.3"
+                "source": "https://github.com/schmittjoh/serializer/tree/3.32.4"
             },
             "funding": [
                 {
                     "url": "https://github.com/goetas",
                     "type": "github"
+                },
+                {
+                    "url": "https://github.com/scyzoryck",
+                    "type": "github"
                 }
             ],
-            "time": "2025-02-11T23:16:25+00:00"
+            "time": "2025-04-06T18:42:47+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -869,12 +873,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68"
+                "reference": "0a8e718713203ec86db768a5c99ce261a9810d5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
-                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/0a8e718713203ec86db768a5c99ce261a9810d5d",
+                "reference": "0a8e718713203ec86db768a5c99ce261a9810d5d",
                 "shasum": ""
             },
             "require": {
@@ -907,9 +911,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.1.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.1.x"
             },
-            "time": "2025-02-19T13:28:12+00:00"
+            "time": "2025-04-15T15:30:49+00:00"
         },
         {
             "name": "psr/container",
@@ -1228,12 +1232,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/BetterReflection.git",
-                "reference": "edd061c21f076887b752b240bcad992837927f58"
+                "reference": "9417dcdaae97685f93129165a8d304e5d2e3f1a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/BetterReflection/zipball/edd061c21f076887b752b240bcad992837927f58",
-                "reference": "edd061c21f076887b752b240bcad992837927f58",
+                "url": "https://api.github.com/repos/Roave/BetterReflection/zipball/9417dcdaae97685f93129165a8d304e5d2e3f1a9",
+                "reference": "9417dcdaae97685f93129165a8d304e5d2e3f1a9",
                 "shasum": ""
             },
             "require": {
@@ -1247,7 +1251,7 @@
             },
             "require-dev": {
                 "phpbench/phpbench": "^1.4.1",
-                "phpunit/phpunit": "^11.5.13"
+                "phpunit/phpunit": "^11.5.17"
             },
             "suggest": {
                 "composer/composer": "Required to use the ComposerSourceLocator"
@@ -1290,7 +1294,7 @@
                 "issues": "https://github.com/Roave/BetterReflection/issues",
                 "source": "https://github.com/Roave/BetterReflection/tree/6.58.x"
             },
-            "time": "2025-03-19T02:57:46+00:00"
+            "time": "2025-04-16T16:00:49+00:00"
         },
         {
             "name": "symfony/console",
@@ -1298,12 +1302,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "a5453dc9ba678ef5654ac1b618ca38f5ba631ebc"
+                "reference": "9bd4d772b9678ebf398763403a8676b3010a18a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/a5453dc9ba678ef5654ac1b618ca38f5ba631ebc",
-                "reference": "a5453dc9ba678ef5654ac1b618ca38f5ba631ebc",
+                "url": "https://api.github.com/repos/symfony/console/zipball/9bd4d772b9678ebf398763403a8676b3010a18a7",
+                "reference": "9bd4d772b9678ebf398763403a8676b3010a18a7",
                 "shasum": ""
             },
             "require": {
@@ -1318,7 +1322,8 @@
                 "symfony/dotenv": "<6.4",
                 "symfony/event-dispatcher": "<6.4",
                 "symfony/lock": "<6.4",
-                "symfony/process": "<6.4"
+                "symfony/process": "<6.4",
+                "symfony/runtime": "<7.3"
             },
             "provide": {
                 "psr/log-implementation": "1.0|2.0|3.0"
@@ -1384,7 +1389,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-17T19:45:23+00:00"
+            "time": "2025-04-07T19:11:40+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1783,12 +1788,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "d65479e099c5e23ce6d9f1d975faeeaad90b1c5b"
+                "reference": "40c295f2deb408d5e9d2d32b8ba1dd61e36f05af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/d65479e099c5e23ce6d9f1d975faeeaad90b1c5b",
-                "reference": "d65479e099c5e23ce6d9f1d975faeeaad90b1c5b",
+                "url": "https://api.github.com/repos/symfony/process/zipball/40c295f2deb408d5e9d2d32b8ba1dd61e36f05af",
+                "reference": "40c295f2deb408d5e9d2d32b8ba1dd61e36f05af",
                 "shasum": ""
             },
             "require": {
@@ -1836,7 +1841,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-13T12:25:57+00:00"
+            "time": "2025-04-17T09:11:12+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -1928,12 +1933,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "3093e031b2fbdca117b919d8b5206b41a7009066"
+                "reference": "a75110076ac661a4a52792b5a1d286d113653a70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/3093e031b2fbdca117b919d8b5206b41a7009066",
-                "reference": "3093e031b2fbdca117b919d8b5206b41a7009066",
+                "url": "https://api.github.com/repos/symfony/string/zipball/a75110076ac661a4a52792b5a1d286d113653a70",
+                "reference": "a75110076ac661a4a52792b5a1d286d113653a70",
                 "shasum": ""
             },
             "require": {
@@ -2007,7 +2012,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-17T19:44:19+00:00"
+            "time": "2025-02-24T14:05:52+00:00"
         }
     ],
     "packages-dev": [],

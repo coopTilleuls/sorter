@@ -87,16 +87,11 @@ class Sorter
             $container = $container->withEnvVariable('COVERALLS_REPO_TOKEN', $coverallsRepoToken);
         }
 
-        if ($ciName) {
-            $container = $container->withEnvVariable('CI_NAME', $ciName);
-        }
-
-        if ($ciJobId) {
-            $container = $container->withEnvVariable('CI_JOB_ID', $ciJobId);
-        }
-
-        if ($ciBranch) {
-            $container = $container->withEnvVariable('CI_BRANCH', $ciBranch);
+        if ($ciName && $ciJobId && $ciBranch) {
+            $container = $container
+                ->withEnvVariable('CI_NAME', $ciName)
+                ->withEnvVariable('CI_JOB_ID', $ciJobId)
+                ->withEnvVariable('CI_BRANCH', $ciBranch);
         }
 
         $container = $container->withExec($exec);
