@@ -7,6 +7,7 @@ namespace Sorter;
 use Sorter\Exception\NoSortException;
 use Sorter\Exception\ScalarExpectedException;
 use Sorter\Exception\UnknowSortDirectionException;
+use Sorter\Util\QueryArrayExtractor;
 use Symfony\Component\HttpFoundation\Request;
 
 final class Sorter
@@ -91,15 +92,16 @@ final class Sorter
     }
 
     /**
-     * @param array<string, scalar|array<string, scalar>> $values
+     * @param array<string, string|array<string, string>> $values
      */
     public function handle(array $values): void
     {
-        if (null !== $this->prefix && isset($values[$this->prefix]) && \is_array($values[$this->prefix])) {
-            $values = $values[$this->prefix];
+        if (null !== $this->prefix) {
+            $values = QueryArrayExtractor::extract($values, $this->prefix);
         }
 
         $sort = new Sort();
+        /** @var array<string, mixed> $values */
         foreach ($values as $field => $value) {
             if (!\is_scalar($value)) {
                 throw new ScalarExpectedException($value);
@@ -123,18 +125,22 @@ final class Sorter
 
     public function handleRequest(Request $request): void
     {
-        $fields = [];
+        if (null !== $this->prefix) {
+            parse_str($this->prefix, $result);
+            $key = array_key_first($result);
 
-        if (null !== $this->prefix && ($values = $request->query->all($this->prefix))) {
-            /** @var array<string, scalar> $values */
-            $this->handle([$this->prefix => $values]);
+            if (\is_string($key)) {
+                /** @psalm-suppress MixedArgumentTypeCoercion */
+                $this->handle([$key => $request->query->all($key)]);
+            }
 
             return;
         }
 
+        $fields = [];
         foreach ($this->getFields() as $field) {
             if (null !== ($value = $request->query->get($field))) {
-                $fields[$field] = $value;
+                $fields[$field] = (string) $value;
             }
         }
 

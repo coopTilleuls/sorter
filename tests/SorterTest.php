@@ -69,6 +69,16 @@ final class SorterTest extends TestCase
         $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('a'));
     }
 
+    public function testHandlesArrayWithDoublePrefix(): void
+    {
+        $this->sorter->setPrefix('prefix[second_prefix]');
+        $this->sorter->add('a', '[a]');
+        $this->sorter->add('b', '[b]');
+        $this->sorter->handle(['prefix' => ['second_prefix' => ['a' => 'ASC']]]);
+
+        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('a'));
+    }
+
     public function testHandleThrowsWithBadValue(): void
     {
         $this->expectException(ScalarExpectedException::class);
@@ -102,6 +112,21 @@ final class SorterTest extends TestCase
         $this->sorter->add('b', '[b]');
 
         $request->query = new InputBag(['prefix' => ['a' => 'ASC']]);
+
+        $this->sorter->handleRequest($request);
+
+        $this->assertSame('ASC', $this->sorter->getCurrentSort()->getDirection('a'));
+    }
+
+    public function testHandlesRequestWithDoublePrefix(): void
+    {
+        /** @var Request&MockObject $request */
+        $request = $this->createMock(Request::class);
+        $this->sorter->setPrefix('prefix[second_prefix]');
+        $this->sorter->add('a', '[a]');
+        $this->sorter->add('b', '[b]');
+
+        $request->query = new InputBag(['prefix' => ['second_prefix' => ['a' => 'ASC']]]);
 
         $this->sorter->handleRequest($request);
 

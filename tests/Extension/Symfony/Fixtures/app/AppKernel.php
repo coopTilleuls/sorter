@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Sorter\Tests\Extension\Symfony\Fixtures\Controller\ArraySortController;
+use Sorter\Tests\Extension\Symfony\Fixtures\Controller\DoublePrefixArraySortController;
 use Sorter\Tests\Extension\Symfony\Fixtures\Controller\PrefixArraySortController;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -43,6 +44,12 @@ final class AppKernel extends Kernel
             ->setAutoconfigured(true)
             ->setAutowired(true)
             ->addTag('controller.service_arguments');
+
+        $container
+            ->setDefinition(DoublePrefixArraySortController::class, new Definition(DoublePrefixArraySortController::class))
+            ->setAutoconfigured(true)
+            ->setAutowired(true)
+            ->addTag('controller.service_arguments');
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
@@ -54,6 +61,9 @@ final class AppKernel extends Kernel
         $routes
             ->add('array-sort-prefix', '/array-sort-prefix')
                 ->controller(PrefixArraySortController::class);
+        $routes
+            ->add('array-sort-double-prefix', '/array-sort-double-prefix')
+                ->controller(DoublePrefixArraySortController::class);
     }
 
     public function getProjectDir(): string

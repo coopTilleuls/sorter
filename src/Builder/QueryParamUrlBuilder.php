@@ -6,6 +6,7 @@ namespace Sorter\Builder;
 
 use Sorter\Sort;
 use Sorter\Sorter;
+use Sorter\Util\QueryArrayExtractor;
 use Symfony\Component\HttpFoundation\Request;
 
 final class QueryParamUrlBuilder implements UrlBuilder
@@ -21,15 +22,23 @@ final class QueryParamUrlBuilder implements UrlBuilder
 
         $parsedUrl = parse_url($request->getUri());
         parse_str($parsedUrl['query'] ?? '', $query);
-
+        /** @var array<string, string|array<string, string>> $query */
         $prefix = $sorter->getPrefix();
         foreach ($sorter->getFields() as $fieldName) {
-            if (null !== $prefix && isset($query[$prefix][$fieldName])) {
-                unset($query[$prefix][$fieldName]);
+            if (null === $prefix) {
+                unset($query[$fieldName]);
+
                 continue;
             }
 
-            unset($query[$fieldName]);
+            /** @var array<string, string|array<string, string>> $queryPart */
+            $queryPart = &$query;
+            foreach (QueryArrayExtractor::extractFullPathFromPrefix($prefix) as $path) {
+                /** @var array<string, string|array<string, string>> $queryPart */
+                $queryPart = &$queryPart[$path];
+            }
+
+            unset($queryPart[$fieldName]);
         }
 
         if (null === $prefix) {
@@ -37,8 +46,12 @@ final class QueryParamUrlBuilder implements UrlBuilder
             $query[$field] = $direction;
         } else {
             /** @var array<string, array<string, string>> $query */
-            $query[$prefix] = $query[$prefix] ?? [];
-            $query[$prefix][$field] = $direction;
+            $queryPart = &$query;
+            foreach (QueryArrayExtractor::extractFullPathFromPrefix($prefix) as $path) {
+                $queryPart = &$queryPart[$path];
+            }
+
+            $queryPart[$field] = $direction;
         }
 
         return ($parsedUrl['path'] ?? '').'?'.http_build_query($query);
