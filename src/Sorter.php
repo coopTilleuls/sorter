@@ -7,6 +7,7 @@ namespace Sorter;
 use Sorter\Exception\NoSortException;
 use Sorter\Exception\ScalarExpectedException;
 use Sorter\Exception\UnknowSortDirectionException;
+use Sorter\Util\QueryArrayExtractor;
 use Symfony\Component\HttpFoundation\Request;
 
 final class Sorter
@@ -91,24 +92,12 @@ final class Sorter
     }
 
     /**
-     * @param array<string, scalar|array<string, scalar>> $values
+     * @param array<string, string|array<string, string>> $values
      */
     public function handle(array $values): void
     {
         if (null !== $this->prefix) {
-            $result = [];
-            parse_str($this->prefix, $result);
-
-            /** @psalm-suppress RedundantCondition */
-            while (\is_array($result)) {
-                $key = array_key_first($result);
-
-                if (!(\is_string($key) && isset($values[$key]) && \is_array($result[$key]))) {
-                    break;
-                }
-                $values = $values[$key];
-                $result = $result[$key];
-            }
+            $values = QueryArrayExtractor::extract($values, $this->prefix);
         }
 
         $sort = new Sort();
@@ -150,7 +139,7 @@ final class Sorter
 
         $fields = [];
         foreach ($this->getFields() as $field) {
-            if (null !== ($value = $request->query->get($field))) {
+            if ($request->query->has($field) && $value = $request->query->getString($field)) {
                 $fields[$field] = $value;
             }
         }
