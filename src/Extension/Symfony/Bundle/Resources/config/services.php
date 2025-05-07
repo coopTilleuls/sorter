@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Sorter\Applier\ArrayApplier;
 use Sorter\Applier\DoctrineORMApplier;
+use Sorter\Applier\SqlApplier;
 use Sorter\Builder\QueryParamUrlBuilder;
 use Sorter\Builder\UrlBuilder;
 use Sorter\Extension\Twig\SortExtension;
@@ -24,6 +25,10 @@ return static function (ContainerConfigurator $container): void {
 
     $services
         ->set(DoctrineORMApplier::class)
+            ->tag('sorter.applier');
+
+    $services
+        ->set(SqlApplier::class)
             ->tag('sorter.applier');
 
     $services
