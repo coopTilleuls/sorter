@@ -30,12 +30,8 @@ final class QueryArrayExtractor
     /**
      * @return string[]
      */
-    public static function extractFullPathFromPrefix(?string $prefix): array
+    public static function extractFullPathFromPrefix(string $prefix): array
     {
-        if (null === $prefix) {
-            return [];
-        }
-
         $matches = [];
         if (!(preg_match('#^(?<outer>[^\[\]]+)(\[([^\[\]]+)])*$#', $prefix, $matches) > 0)) {
             throw new CannotExtractException('Invalid prefix format: '.$prefix);
