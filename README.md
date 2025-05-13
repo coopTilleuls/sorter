@@ -10,9 +10,9 @@ Sorter is a PHP column sorting library that allows you to apply sorts of any kin
 Features
 --------
 
- * Sorts any kind of data source
+ * Sorts any kind of data source (array, Doctrine ORM, and plain SQL built-in)
  * Sorts by multiple columns
- * Factorise sorting logic into definitions classes
+ * Factorize sorting logic into definitions classes
  * Process HTTP request
  * Symfony Bundle
  * Twig extension
@@ -41,7 +41,14 @@ Usage
 
 Sorter provides a `SorterFactory` class that allows you to sort your data source. 
 
-The factory require an applier to apply the sort to the data source.
+The factory builds a sorter instance and requires an applier to apply the sort to the data source.
+
+The classic way to use it is the following :
+
+ 1. Create a `SorterFactory` instance (if you are not using Symfony)
+ 2. Create a sorter instance using the factory
+ 3. Define the sorting columns, the default sort, and eventually the query prefix
+
 
 ### Basic sorting
 
@@ -50,7 +57,7 @@ The factory require an applier to apply the sort to the data source.
 // Create the sorter factory (useless with Symfony)
 $factory = new SorterFactory([new DoctrineORMApplier()]);
 
-// Create your sorter definition
+// Create your sorter instance and make your definition
 $sorter = $factory->createSorter()
     ->add('title', 'p.title')
     ->add('date', 'p.date')
@@ -63,6 +70,13 @@ $sorter->handle([]);
 $data = $sorter->sort($data);
 
 ```
+
+The `Sorter\Sorter` class providers the following methods to define your sorts :
+ * `$sorter->add(string $field, string $path)` : Adds a new column to the sorter. `$field` is the name of the column, 
+    and `$path` is the path to the column in your data source. The path can be a SQL expression, a property name, or even an array key index.
+ * `$sorter->addDefault(string $field, string $direction)` / `$sorter->removeDefault(string $field)` : Adds a default sort to the sorter.
+   `$field` is the name of the column, and `$direction` is the direction of the sort (`Sort::ASC` or `Sort::DESC`).
+ * `$sorter->setPrefix(string $prefix)` : Sets the prefix to be used in the query string. This is useful if you want to use several sorters in the same page.
 
 ### Symfony usage
 
@@ -104,7 +118,8 @@ class IndexController
 
 ### Definition class
 
-You can factorise your sorting logic into a definition class.
+You can factorize your sorting logic into a definition class. 
+Definition classes are useful if you want to reuse the same sorting logic in several places.
 
 ```php
 
@@ -151,5 +166,51 @@ class IndexController
         );
     }
 }
+
+```
+
+### Twig extension
+
+You can use the `SorterExtension` to render the sorting links in your Twig templates.
+
+The twig extension provides the following functions:
+
+ * `sorter_link` : Renders a ready to use and request aware sorting link. 
+ * `sorter_url` : Renders a URL for the sorting link. This is useful if you want to use your own HTML.
+ * `sorter_direction` : Returns the direction of the sort for a given column. This is useful if you want to use your own HTML.
+
+#### Example
+
+```twig
+<table>
+  <thead>
+    <tr>
+      <th scope="col" data-col="title">
+        {{ sorter_link(sorter, 'title', 'Title') }}
+      </th>
+      <th scope="col" data-col="a">
+        {{ sorter_link(sorter, 'a', 'A') }}
+      </th>
+      <th scope="col" data-col="b">
+        <a href="{{ sorter_url(sorter, 'b') }}" class="SortLink SortLink--{{ sorter_direction(sorter, 'b') }}">B</a>
+      </th>
+      <th scope="col" data-col="c">
+        <a href="{{ sorter_url(sorter, 'c') }}" class="SortLink SortLink--{{ sorter_direction(sorter, 'c') }}">
+          C
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data %}
+      <tr>
+        <th scope="row">{{ row.title }}</th>
+        <td>{{ row.a }}</td>
+        <td>{{ row.b }}</td>
+        <td>{{ row.c }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 ```
