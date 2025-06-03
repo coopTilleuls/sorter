@@ -9,6 +9,11 @@ use Sorter\Sort;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
+/**
+ * @template TSortableData
+ *
+ * @implements SortApplier<TSortableData>
+ */
 final class ArrayApplier implements SortApplier
 {
     private readonly PropertyAccessor $propertyAccessor;

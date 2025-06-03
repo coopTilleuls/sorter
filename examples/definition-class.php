@@ -12,6 +12,7 @@ $data = generate_data();
 
 final class PostSortDefinition implements Definition
 {
+    #[\Override]
     public function buildSorter(Sorter $sorter): void
     {
         $sorter

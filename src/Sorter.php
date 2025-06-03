@@ -147,6 +147,15 @@ final class Sorter
         $this->handle($fields);
     }
 
+    /**
+     * @template TSortableData
+     *
+     * @psalm-suppress MixedReturnStatement
+     *
+     * @param TSortableData $data
+     *
+     * @return TSortableData
+     */
     public function sort(mixed $data, array $options = []): mixed
     {
         return $this->factory->getApplier($data)->apply($this->getCurrentSort(), $data, $options);
