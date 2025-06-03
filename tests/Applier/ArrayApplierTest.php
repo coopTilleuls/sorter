@@ -126,7 +126,7 @@ enum SortableBackedEnum: string
 }
 
 /**
- * @extends Comparable<SortableObject>
+ * @implements Comparable<SortableObject>
  */
 final class SortableObject implements Comparable
 {
@@ -134,9 +134,6 @@ final class SortableObject implements Comparable
     {
     }
 
-    /**
-     * @param Comparable<self> $other
-     */
     #[\Override]
     public function compare(Comparable $other): int
     {

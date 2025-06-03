@@ -10,7 +10,7 @@ namespace Sorter;
 interface Comparable
 {
     /**
-     * @param Comparable<T> $other the object to compare with
+     * @param T $other the object to compare with
      */
-    public function compare(self $other): int;
+    public function compare(Comparable $other): int;
 }
