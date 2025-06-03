@@ -74,4 +74,30 @@ final class ArrayApplierTest extends TestCase
             (new ArrayApplier())->apply($sort, $toBeSorted)
         );
     }
+
+    public function testItSortEnumArray(): void
+    {
+        $toBeSorted = [['enum' => SortableBackedEnum::B], ['enum' => SortableBackedEnum::A], ['enum' => SortableBackedEnum::C]];
+
+        $sort = new Sort;
+        $sort->add('enum', '[enum]', 'ASC');
+
+        $this->assertSame(
+            [['enum' => SortableBackedEnum::A], ['enum' => SortableBackedEnum::B], ['enum' => SortableBackedEnum::C]],
+            (new ArrayApplier())->apply($sort, $toBeSorted),
+        );
+
+        $sort->add('enum', '[enum]', 'DESC');
+        $this->assertSame(
+            [['enum' => SortableBackedEnum::C], ['enum' => SortableBackedEnum::B], ['enum' => SortableBackedEnum::A]],
+            (new ArrayApplier())->apply($sort, $toBeSorted),
+        );
+    }
+}
+
+enum SortableBackedEnum: string
+{
+    case A = 'a';
+    case B = 'b';
+    case C = 'c';
 }

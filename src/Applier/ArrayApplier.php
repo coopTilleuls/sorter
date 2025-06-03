@@ -44,6 +44,11 @@ final class ArrayApplier implements SortApplier
                     /** @var mixed $rightValue */
                     $rightValue = $this->propertyAccessor->getValue($right, $sort->getPath($field));
 
+                    if ($leftValue instanceof \BackedEnum && $rightValue instanceof \BackedEnum) {
+                        $leftValue = $leftValue->value;
+                        $rightValue = $rightValue->value;
+                    }
+
                     if ($leftValue > $rightValue) {
                         return Sort::ASC === $sort->getDirection($field) ? 1 : -1;
                     }
