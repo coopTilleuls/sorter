@@ -13,6 +13,9 @@ use Sorter\Exception\IncompatibleQueryException;
 use Sorter\Exception\PackageMissingException;
 use Sorter\Sort;
 
+/**
+ * @implements SortApplier<string>
+ */
 final class SqlApplier implements SortApplier
 {
     #[\Override]
@@ -29,7 +32,6 @@ final class SqlApplier implements SortApplier
             throw new IncompatibleApplierException('SQL String', $data);
         }
 
-        /** @var string $data */
         $parser = new Parser($data, false);
         $selectStatement = $parser->statements[0];
         if (!$selectStatement instanceof SelectStatement) {

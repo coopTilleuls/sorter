@@ -3,9 +3,23 @@
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\MockObject\Generator\Generator as MockGenerator;
+use PHPUnit\Framework\MockObject\MockObject;
 
+/**
+ * @param array{
+ *       'id': int,
+ *       'title': string,
+ *       'date': \DateTimeImmutable,
+ *       'weight': int,
+ *       'comments': array<int, int>
+ *   }[] $data
+ */
 function display_data(array $data): void
 {
+    if (0 === count($data)) {
+        return;
+    }
+
     $maxTitleLength = max(array_map(fn(string $t) => mb_strlen($t), array_column($data, 'title')));
     $horizontalLine = ' -------' . str_repeat('-', $maxTitleLength - mb_strlen('Title')) . "-----------------------------------" . PHP_EOL;
 
@@ -30,6 +44,15 @@ function display_data(array $data): void
     echo $horizontalLine;
 }
 
+/**
+ * @return array{
+ *        'id': int,
+ *        'title': string,
+ *        'date': \DateTimeImmutable,
+ *        'weight': int,
+ *        'comments': array<int, int>
+ *    }[]
+ */
 function generate_data(): array
 {
     return [
@@ -48,7 +71,11 @@ function generate_data(): array
     ];
 }
 
+/**
+ * @psalm-suppress InternalMethod
+ */
 function create_query_builder(): QueryBuilder {
+    /** @var EntityManagerInterface&MockObject $em */
     $em = (new MockGenerator())->testDouble(
         EntityManagerInterface::class,
         true,

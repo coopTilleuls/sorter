@@ -7,15 +7,18 @@ namespace Sorter;
 use Sorter\Applier\SortApplier;
 use Sorter\Exception\UnknowApplierException;
 
+/**
+ * @template TSortableData
+ */
 final class SorterFactory
 {
     /**
-     * @var SortApplier[]
+     * @var SortApplier<TSortableData>[]
      */
     private readonly array $appliers;
 
     /**
-     * @param SortApplier[] $appliers
+     * @param SortApplier<TSortableData>[] $appliers
      */
     public function __construct(array $appliers)
     {
@@ -32,6 +35,9 @@ final class SorterFactory
         return $sorter;
     }
 
+    /**
+     * @return SortApplier<TSortableData>
+     */
     public function getApplier(mixed $data): SortApplier
     {
         foreach ($this->appliers as $applier) {

@@ -8,6 +8,9 @@ use Doctrine\ORM\QueryBuilder;
 use Sorter\Exception\IncompatibleApplierException;
 use Sorter\Sort;
 
+/**
+ * @implements SortApplier<QueryBuilder>
+ */
 final class DoctrineORMApplier implements SortApplier
 {
     #[\Override]
