@@ -12,5 +12,5 @@ interface Comparable
     /**
      * @param T $other the object to compare with
      */
-    public function compare(Comparable $other): int;
+    public function compare(self $other): int;
 }
