@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sorter;
 
 /**
@@ -8,7 +10,7 @@ namespace Sorter;
 interface Comparable
 {
     /**
-     * @param Comparable<T> $other The object to compare with.
+     * @param Comparable<T> $other the object to compare with
      */
-    public function compare(Comparable $other): int;
+    public function compare(self $other): int;
 }
