@@ -214,3 +214,28 @@ The twig extension provides the following functions:
 </table>
 
 ```
+
+### Object sorting with ArrayApplier
+
+By default, ArrayApplier use the PHP spaceship operator `<=>` to compare values. 
+With some objects, you may want to use a custom comparison function.
+
+You can use the `Comparable` interface to define a custom comparison function for your objects.
+
+```php
+
+final class CustomObject implements Comparable
+{
+    public function __construct(
+        public string $value1,
+        public string $value2,
+    ) {
+    }
+
+    public function compare(Comparable $other): int
+    {
+        return $this->value2 <=> $other->value2;
+    }
+}
+
+```php

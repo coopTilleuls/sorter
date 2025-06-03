@@ -7,6 +7,7 @@ namespace Sorter\Tests\Applier;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sorter\Applier\ArrayApplier;
+use Sorter\Comparable;
 use Sorter\Exception\IncompatibleApplierException;
 use Sorter\Sort;
 
@@ -73,5 +74,69 @@ final class ArrayApplierTest extends TestCase
             ],
             (new ArrayApplier())->apply($sort, $toBeSorted)
         );
+    }
+
+    public function testItSortEnumArray(): void
+    {
+        $toBeSorted = [['enum' => SortableBackedEnum::B], ['enum' => SortableBackedEnum::A], ['enum' => SortableBackedEnum::C]];
+
+        $sort = new Sort();
+        $sort->add('enum', '[enum]', 'ASC');
+
+        $this->assertSame(
+            [['enum' => SortableBackedEnum::A], ['enum' => SortableBackedEnum::B], ['enum' => SortableBackedEnum::C]],
+            (new ArrayApplier())->apply($sort, $toBeSorted),
+        );
+
+        $sort->add('enum', '[enum]', 'DESC');
+        $this->assertSame(
+            [['enum' => SortableBackedEnum::C], ['enum' => SortableBackedEnum::B], ['enum' => SortableBackedEnum::A]],
+            (new ArrayApplier())->apply($sort, $toBeSorted),
+        );
+    }
+
+    public function testItSortObjectArray(): void
+    {
+        $a = new SortableObject('z', 'a');
+        $b = new SortableObject('y', 'b');
+        $c = new SortableObject('x', 'c');
+        $toBeSorted = [['object' => $b], ['object' => $a], ['object' => $c]];
+
+        $sort = new Sort();
+        $sort->add('object', '[object]', 'ASC');
+
+        $this->assertSame(
+            [['object' => $a], ['object' => $b], ['object' => $c]],
+            (new ArrayApplier())->apply($sort, $toBeSorted),
+        );
+
+        $sort->add('object', '[object]', 'DESC');
+        $this->assertSame(
+            [['object' => $c], ['object' => $b], ['object' => $a]],
+            (new ArrayApplier())->apply($sort, $toBeSorted),
+        );
+    }
+}
+
+enum SortableBackedEnum: string
+{
+    case A = 'a';
+    case B = 'b';
+    case C = 'c';
+}
+
+/**
+ * @implements Comparable<SortableObject>
+ */
+final class SortableObject implements Comparable
+{
+    public function __construct(public readonly string $value1, public readonly string $value2)
+    {
+    }
+
+    #[\Override]
+    public function compare(Comparable $other): int
+    {
+        return $this->value2 <=> $other->value2;
     }
 }

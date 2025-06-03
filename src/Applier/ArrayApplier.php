@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sorter\Applier;
 
+use Sorter\Comparable;
 use Sorter\Exception\IncompatibleApplierException;
 use Sorter\Sort;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -43,6 +44,15 @@ final class ArrayApplier implements SortApplier
                     $leftValue = $this->propertyAccessor->getValue($left, $sort->getPath($field));
                     /** @var mixed $rightValue */
                     $rightValue = $this->propertyAccessor->getValue($right, $sort->getPath($field));
+
+                    if ($leftValue instanceof Comparable && $rightValue instanceof Comparable) {
+                        return (Sort::ASC === $sort->getDirection($field) ? 1 : -1) * $leftValue->compare($rightValue);
+                    }
+
+                    if ($leftValue instanceof \BackedEnum && $rightValue instanceof \BackedEnum) {
+                        $leftValue = $leftValue->value;
+                        $rightValue = $rightValue->value;
+                    }
 
                     if ($leftValue > $rightValue) {
                         return Sort::ASC === $sort->getDirection($field) ? 1 : -1;
