@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sorter\Handler;
 
 use Sorter\Exception\NoHandlerException;
@@ -11,10 +13,10 @@ final class RequestHandlerCollection implements RequestHandler
      */
     public function __construct(
         private readonly iterable $handlers,
-    )
-    {
+    ) {
     }
 
+    #[\Override]
     public function handle(mixed $request, array $sorterFields, ?string $prefix): array
     {
         foreach ($this->handlers as $handler) {
@@ -23,6 +25,6 @@ final class RequestHandlerCollection implements RequestHandler
             }
         }
 
-        throw new NoHandlerException(is_object($request) ? get_class($request) : gettype($request));
+        throw new NoHandlerException(\is_object($request) ? $request::class : \gettype($request));
     }
 }

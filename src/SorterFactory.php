@@ -20,8 +20,7 @@ final class SorterFactory
     public function __construct(
         private readonly array $appliers,
         private readonly RequestHandler $requestHandler = new SymfonyHttpFoundationRequestHandler(),
-    )
-    {
+    ) {
     }
 
     public function createSorter(?Definition $definition = null): Sorter

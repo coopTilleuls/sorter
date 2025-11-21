@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sorter\Tests\Handler;
 
+use PHPUnit\Framework\TestCase;
 use Sorter\Exception\NoHandlerException;
 use Sorter\Handler\RequestHandlerCollection;
-use PHPUnit\Framework\TestCase;
 use Sorter\Handler\RequestHandlerStrategy;
 
 final class RequestHandlerCollectionTest extends TestCase

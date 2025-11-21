@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sorter\Tests\Handler;
 
-use Sorter\Handler\SymfonyHttpFoundationRequestHandler;
 use PHPUnit\Framework\TestCase;
+use Sorter\Handler\SymfonyHttpFoundationRequestHandler;
 use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 

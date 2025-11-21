@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sorter\Extension\Symfony\Bundle\DependencyInjection\Compiler;
 
 use Sorter\Handler\RequestHandlerCollection;

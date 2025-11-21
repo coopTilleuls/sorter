@@ -13,6 +13,7 @@ use Sorter\Handler\RequestHandlerCollection;
 use Sorter\Handler\SymfonyHttpFoundationRequestHandler;
 use Sorter\SorterFactory;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $container): void {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sorter\Tests\Extension\Symfony\Bundle\DependencyInjection\Compiler;
 
 use PHPUnit\Framework\TestCase;
@@ -11,7 +13,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class RequestHandlerPassTest extends TestCase
 {
-
     public function testAppliersAreRegistered(): void
     {
         $containerBuilder = $this->createMock(ContainerBuilder::class);

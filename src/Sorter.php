@@ -31,8 +31,7 @@ final class Sorter
     public function __construct(
         private readonly SorterFactory $factory,
         private readonly RequestHandler $requestHandler = new SymfonyHttpFoundationRequestHandler(),
-    )
-    {
+    ) {
     }
 
     public function add(string $field, ?string $path = null): self
