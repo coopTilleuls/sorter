@@ -36,7 +36,8 @@
     },
     "suggest": {
         "doctrine/orm": "Needed for use of ORMApplier",
-        "symfony/property-access": "Needed for use of ArrayAdapter"
+        "phpmyadmin/sql-parser": "Needed for use of SQLApplier",
+        "symfony/property-access": "Needed for use of ArrayApplier"
     },
     "authors": [
         {

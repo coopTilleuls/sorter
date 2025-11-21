@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Sorter\Applier;
 
+use PhpMyAdmin\SqlParser\Parser;
 use Sorter\Comparable;
 use Sorter\Exception\IncompatibleApplierException;
+use Sorter\Exception\PackageMissingException;
 use Sorter\Sort;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -27,6 +29,13 @@ final class ArrayApplier implements SortApplier
     #[\Override]
     public function apply(Sort $sort, mixed $data, array $options = []): array
     {
+        if (!class_exists(Parser::class)) {
+            // @codeCoverageIgnoreStart
+            // @infection-ignore-all
+            throw new PackageMissingException('symfony/property-access', __CLASS__);
+            // @codeCoverageIgnoreEnd
+        }
+
         if (!\is_array($data)) {
             throw new IncompatibleApplierException('array', $data);
         }
