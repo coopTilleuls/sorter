@@ -25,7 +25,7 @@ final class DoctrineORMApplier implements SortApplier
         foreach ($sort->getFields() as $i => $field) {
             $path = $sort->getPath($field);
             if (!str_contains($path, '.')) {
-                $path = $data->getRootAliases()[0] . '.' . $path;
+                $path = $data->getRootAliases()[0].'.'.$path;
             }
 
             $data->{(0 === $i && $override) ? 'orderBy' : 'addOrderBy'}($path, $sort->getDirection($field));

@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 final class Sorter
 {
     /**
-     * @var array<string, string>
+     * @var array<string, string|null>
      */
     private array $fields = [];
 
@@ -79,7 +79,7 @@ final class Sorter
 
     public function getPath(string $field): string
     {
-        return $this->fields[$field] ?: $field;
+        return $this->fields[$field] ?? $field;
     }
 
     public function getCurrentSort(): Sort

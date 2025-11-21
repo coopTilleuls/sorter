@@ -41,7 +41,10 @@ final class SqlApplier implements SortApplier
         foreach ($sort->getFields() as $field) {
             $path = $sort->getPath($field);
             if (!str_contains($path, '.')) {
-                $path = ($selectStatement->from[0]->alias ?: $selectStatement->from[0]->table) . '.' . $path;
+                $tableName = $selectStatement->from[0]->alias ?? $selectStatement->from[0]->table;
+                \assert(null !== $tableName);
+
+                $path = $tableName.'.'.$path;
             }
 
             $newOrderKeyword = new OrderKeyword(new Expression($path), strtoupper($sort->getDirection($field)));

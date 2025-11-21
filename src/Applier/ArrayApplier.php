@@ -42,8 +42,8 @@ final class ArrayApplier implements SortApplier
                 foreach ($sort->getFields() as $field) {
                     $path = $sort->getPath($field);
 
-                    if (!str_contains($path, '[') && is_array($left)) {
-                        $path = '[' . $path . ']';
+                    if (!str_contains($path, '[') && \is_array($left)) {
+                        $path = '['.$path.']';
                     }
 
                     /** @var mixed $leftValue */
