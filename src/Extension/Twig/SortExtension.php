@@ -72,7 +72,7 @@ final class SortExtension extends AbstractExtension
 
         /** @var array<string, string> $attributes */
         $attributesStr = implode(' ', array_map(
-            fn (string $key, string $value) => \sprintf('%s="%s"', $key, $value),
+            fn (string $key, string $value) => \sprintf('%s="%s"', $key, htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')),
             array_keys($attributes),
             $attributes,
         ));
