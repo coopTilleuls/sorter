@@ -17,13 +17,13 @@ use function Dagger\dag;
 #[Doc('Sorter dagger functions')]
 class Sorter
 {
-    private const PHP_VERSIONS = ['8.1', '8.2', '8.3', '8.4'];
+    private const PHP_VERSIONS = ['8.1', '8.2', '8.3', '8.4', '8.5'];
 
     #[DaggerFunction]
     #[Doc('Build test environnment')]
     public function build(
         #[DefaultPath('.')] Directory $source,
-        string $phpVersion = '8.3',
+        string $phpVersion = '8.4',
         string $dependencyVersion = 'highest',
     ): Container
     {
@@ -66,7 +66,7 @@ class Sorter
     #[Doc('Run test suite')]
     public function test(
         #[DefaultPath('.')] Directory $source,
-        string $phpVersion = '8.3',
+        string $phpVersion = '8.4',
         string $dependencyVersion = 'highest',
         ?string $coverallsRepoToken = null,
         ?string $ciName = null,
@@ -138,7 +138,7 @@ class Sorter
     ): string
     {
         $container = $this
-            ->build($source, '8.1')
+            ->build($source, '8.4')
             ->withExec(['apt-get', 'update'])
             ->withExec(['apt-get', 'install', '-y', 'git'])
             ->withDirectory('.git', $source->directory('.git'));
