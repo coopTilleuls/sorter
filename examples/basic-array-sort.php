@@ -13,10 +13,10 @@ display_data($data);
 
 $factory = new SorterFactory([new ArrayApplier()]);
 $sorter = $factory->createSorter()
-    ->add('title', '[title]')
-    ->add('date', '[date]')
-    ->add('weight', '[weight]')
-    ->add('comments', '[comments]')
+    ->add('title')
+    ->add('date')
+    ->add('poids', '[weight]')
+    ->add('comments')
     ->addDefault('date', 'ASC');
 
 
@@ -33,7 +33,7 @@ display_data($data);
 
 
 echo "\n\n Multiple sort (Ascending Weight and Ascending Title):\n";
-$sorter->handle(['weight' => 'ASC', 'title' => 'ASC']);
+$sorter->handle(['poids' => 'ASC', 'title' => 'ASC']);
 $data = $sorter->sort($data);
 display_data($data);
 

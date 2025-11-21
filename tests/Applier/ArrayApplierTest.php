@@ -76,6 +76,30 @@ final class ArrayApplierTest extends TestCase
         );
     }
 
+    public function testSortBasicArrayWithoutExplicitPath(): void
+    {
+        /** @var Sort&MockObject $sort */
+        $toBeSorted = [
+            ['a' => 123],
+            ['a' => 456],
+            ['a' => 789],
+        ];
+
+        $sort = $this->createMock(Sort::class);
+        $sort->method('getFields')->willReturn(['a']);
+        $sort->method('getPath')->with('a')->willReturn('a');
+        $sort->method('getDirection')->with('a')->willReturn('DESC');
+
+        $this->assertSame(
+            [
+                ['a' => 789],
+                ['a' => 456],
+                ['a' => 123],
+            ],
+            (new ArrayApplier())->apply($sort, $toBeSorted)
+        );
+    }
+
     public function testItSortEnumArray(): void
     {
         $toBeSorted = [['enum' => SortableBackedEnum::B], ['enum' => SortableBackedEnum::A], ['enum' => SortableBackedEnum::C]];
@@ -95,7 +119,7 @@ final class ArrayApplierTest extends TestCase
         );
     }
 
-    public function testItSortObjectArray(): void
+    public function testItSortObjectArrayArray(): void
     {
         $a = new SortableObject('z', 'a');
         $b = new SortableObject('y', 'b');
@@ -113,6 +137,28 @@ final class ArrayApplierTest extends TestCase
         $sort->add('object', '[object]', 'DESC');
         $this->assertSame(
             [['object' => $c], ['object' => $b], ['object' => $a]],
+            (new ArrayApplier())->apply($sort, $toBeSorted),
+        );
+    }
+
+    public function testItSortObjectArray(): void
+    {
+        $a = new SortableObject('z', 'a');
+        $b = new SortableObject('y', 'b');
+        $c = new SortableObject('x', 'c');
+        $toBeSorted = [$b, $a, $c];
+
+        $sort = new Sort();
+        $sort->add('value2', 'value2', 'ASC');
+
+        $this->assertSame(
+            [$a, $b, $c],
+            (new ArrayApplier())->apply($sort, $toBeSorted),
+        );
+
+        $sort->add('value2', 'value2', 'DESC');
+        $this->assertSame(
+            [$c, $b, $a],
             (new ArrayApplier())->apply($sort, $toBeSorted),
         );
     }

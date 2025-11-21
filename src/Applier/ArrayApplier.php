@@ -40,10 +40,16 @@ final class ArrayApplier implements SortApplier
              */
             function ($left, $right) use ($sort) {
                 foreach ($sort->getFields() as $field) {
+                    $path = $sort->getPath($field);
+
+                    if (!str_contains($path, '[') && \is_array($left)) {
+                        $path = '['.$path.']';
+                    }
+
                     /** @var mixed $leftValue */
-                    $leftValue = $this->propertyAccessor->getValue($left, $sort->getPath($field));
+                    $leftValue = $this->propertyAccessor->getValue($left, $path);
                     /** @var mixed $rightValue */
-                    $rightValue = $this->propertyAccessor->getValue($right, $sort->getPath($field));
+                    $rightValue = $this->propertyAccessor->getValue($right, $path);
 
                     if ($leftValue instanceof Comparable && $rightValue instanceof Comparable) {
                         return (Sort::ASC === $sort->getDirection($field) ? 1 : -1) * $leftValue->compare($rightValue);
