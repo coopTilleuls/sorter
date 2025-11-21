@@ -143,7 +143,7 @@ class Sorter
             ->withExec(['apt-get', 'install', '-y', 'git'])
             ->withDirectory('.git', $source->directory('.git'));
 
-        $exec = ['./vendor/bin/infection', '--threads=1', '--min-msi=90'];
+        $exec = ['./vendor/bin/infection', '--threads=1', '--min-msi=90', '--show-mutations'];
 
         if ($strykerDashboardApiKey && $githubActions) {
             $exec[] = '--logger-github=true';
