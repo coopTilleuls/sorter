@@ -138,7 +138,7 @@ class Sorter
     ): string
     {
         $container = $this
-            ->build($source, '8.4')
+            ->build($source, '8.3')
             ->withExec(['apt-get', 'update'])
             ->withExec(['apt-get', 'install', '-y', 'git'])
             ->withDirectory('.git', $source->directory('.git'));

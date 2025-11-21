@@ -40,6 +40,15 @@ final class SorterTest extends TestCase
         $this->assertSame('[a]', $this->sorter->getPath('a'));
     }
 
+    public function testItUsesFieldAsPathOnNullPath(): void
+    {
+        $this->sorter->add('a');
+        $this->sorter->add('b');
+
+        $this->assertSame(['a', 'b'], $this->sorter->getFields());
+        $this->assertSame('a', $this->sorter->getPath('a'));
+    }
+
     public function testTakesFieldsIntoAccountWithPrefix(): void
     {
         $this->sorter->setPrefix('prefix');

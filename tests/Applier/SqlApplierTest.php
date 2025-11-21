@@ -65,6 +65,34 @@ final class SqlApplierTest extends TestCase
         );
     }
 
+    public function testItDoesBasicSortWithImplicitPath(): void
+    {
+        $sql = 'SELECT * FROM users ORDER BY users.a ASC';
+        $sort = $this->createMock(Sort::class);
+        $sort->method('getFields')->willReturn(['a']);
+        $sort->method('getPath')->with('a')->willReturn('a');
+        $sort->method('getDirection')->with('a')->willReturn('DESC');
+
+        $this->assertSame(
+            'SELECT * FROM users ORDER BY users.a DESC',
+            $this->applier->apply($sort, $sql),
+        );
+    }
+
+    public function testItDoesBasicSortWithImplicitPathAndAliasedTable(): void
+    {
+        $sql = 'SELECT * FROM users AS `u`';
+        $sort = $this->createMock(Sort::class);
+        $sort->method('getFields')->willReturn(['a']);
+        $sort->method('getPath')->with('a')->willReturn('a');
+        $sort->method('getDirection')->with('a')->willReturn('DESC');
+
+        $this->assertSame(
+            'SELECT * FROM users AS `u` ORDER BY u.a DESC',
+            $this->applier->apply($sort, $sql),
+        );
+    }
+
     public function testItDoesBasicSortWithPreExistingSort(): void
     {
         $sql = 'SELECT * FROM users ORDER BY users.name ASC';

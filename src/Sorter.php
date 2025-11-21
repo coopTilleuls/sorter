@@ -30,7 +30,7 @@ final class Sorter
     {
     }
 
-    public function add(string $field, string $path): self
+    public function add(string $field, ?string $path = null): self
     {
         $this->fields[$field] = $path;
 
@@ -79,7 +79,7 @@ final class Sorter
 
     public function getPath(string $field): string
     {
-        return $this->fields[$field];
+        return $this->fields[$field] ?: $field;
     }
 
     public function getCurrentSort(): Sort

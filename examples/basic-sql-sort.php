@@ -10,7 +10,7 @@ $sql = 'SELECT p, COUNT(p.comments) FROM post p INNER JOIN p.comments comments G
 
 $factory = new SorterFactory([new SqlApplier()]);
 $sorter = $factory->createSorter()
-    ->add('title', 'p.title')
+    ->add('title')
     ->add('date', 'p.date')
     ->add('weight', 'p.weight')
     ->add('comments', 'COUNT(p.comments)')
