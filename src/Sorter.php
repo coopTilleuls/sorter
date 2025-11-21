@@ -127,7 +127,7 @@ final class Sorter
         $this->currentSort = $sort;
     }
 
-    public function handleRequest(Request $request): void
+    public function handleRequest(mixed $request): void
     {
         $this->handle($this->requestHandler->handle($request, $this->getFields(), $this->getPrefix()));
     }
