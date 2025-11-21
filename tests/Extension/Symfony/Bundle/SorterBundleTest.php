@@ -7,6 +7,7 @@ namespace Sorter\Tests\Extension\Symfony\Bundle;
 use Sorter\Builder\QueryParamUrlBuilder;
 use Sorter\Builder\UrlBuilder;
 use Sorter\Extension\Symfony\Bundle\DependencyInjection\Compiler\ApplierCompilerPass;
+use Sorter\Extension\Symfony\Bundle\DependencyInjection\Compiler\RequestHandlerPass;
 use Sorter\Extension\Symfony\Bundle\SorterBundle;
 use Sorter\SorterFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -27,9 +28,12 @@ final class SorterBundleTest extends KernelTestCase
     public function testCompilerPassIsAdded(): void
     {
         $containerMock = $this->createMock(ContainerBuilder::class);
-        $containerMock->expects($this->once())
+        $containerMock->expects($this->exactly(2))
             ->method('addCompilerPass')
-            ->with($this->isInstanceOf(ApplierCompilerPass::class));
+            ->with($this->logicalOr(
+                $this->isInstanceOf(ApplierCompilerPass::class),
+                $this->isInstanceOf(RequestHandlerPass::class)
+            ));
 
         $bundle = new SorterBundle();
         $bundle->build($containerMock);

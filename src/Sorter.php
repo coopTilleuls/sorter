@@ -7,6 +7,8 @@ namespace Sorter;
 use Sorter\Exception\NoSortException;
 use Sorter\Exception\ScalarExpectedException;
 use Sorter\Exception\UnknowSortDirectionException;
+use Sorter\Handler\RequestHandler;
+use Sorter\Handler\SymfonyHttpFoundationRequestHandler;
 use Sorter\Util\QueryArrayExtractor;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -26,7 +28,10 @@ final class Sorter
 
     private ?string $prefix = null;
 
-    public function __construct(private readonly SorterFactory $factory)
+    public function __construct(
+        private readonly SorterFactory $factory,
+        private readonly RequestHandler $requestHandler = new SymfonyHttpFoundationRequestHandler(),
+    )
     {
     }
 
@@ -125,26 +130,7 @@ final class Sorter
 
     public function handleRequest(Request $request): void
     {
-        if (null !== $this->prefix) {
-            parse_str($this->prefix, $result);
-            $key = array_key_first($result);
-
-            if (\is_string($key)) {
-                /** @psalm-suppress MixedArgumentTypeCoercion */
-                $this->handle([$key => $request->query->all($key)]);
-            }
-
-            return;
-        }
-
-        $fields = [];
-        foreach ($this->getFields() as $field) {
-            if (null !== ($value = $request->query->get($field))) {
-                $fields[$field] = (string) $value;
-            }
-        }
-
-        $this->handle($fields);
+        $this->handle($this->requestHandler->handle($request, $this->getFields(), $this->getPrefix()));
     }
 
     /**

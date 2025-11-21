@@ -6,6 +6,8 @@ namespace Sorter;
 
 use Sorter\Applier\SortApplier;
 use Sorter\Exception\UnknowApplierException;
+use Sorter\Handler\RequestHandler;
+use Sorter\Handler\SymfonyHttpFoundationRequestHandler;
 
 /**
  * @template TSortableData
@@ -13,21 +15,18 @@ use Sorter\Exception\UnknowApplierException;
 final class SorterFactory
 {
     /**
-     * @var SortApplier<TSortableData>[]
-     */
-    private readonly array $appliers;
-
-    /**
      * @param SortApplier<TSortableData>[] $appliers
      */
-    public function __construct(array $appliers)
+    public function __construct(
+        private readonly array $appliers,
+        private readonly RequestHandler $requestHandler = new SymfonyHttpFoundationRequestHandler(),
+    )
     {
-        $this->appliers = $appliers;
     }
 
     public function createSorter(?Definition $definition = null): Sorter
     {
-        $sorter = new Sorter($this);
+        $sorter = new Sorter($this, $this->requestHandler);
         if (null !== $definition) {
             $definition->buildSorter($sorter);
         }
