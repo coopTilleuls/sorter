@@ -10,7 +10,6 @@ use Sorter\Exception\UnknowSortDirectionException;
 use Sorter\Handler\RequestHandler;
 use Sorter\Handler\SymfonyHttpFoundationRequestHandler;
 use Sorter\Util\QueryArrayExtractor;
-use Symfony\Component\HttpFoundation\Request;
 
 final class Sorter
 {
@@ -127,7 +126,7 @@ final class Sorter
         $this->currentSort = $sort;
     }
 
-    public function handleRequest(Request $request): void
+    public function handleRequest(mixed $request): void
     {
         $this->handle($this->requestHandler->handle($request, $this->getFields(), $this->getPrefix()));
     }
